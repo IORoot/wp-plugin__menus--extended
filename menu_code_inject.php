@@ -25,3 +25,4 @@ require __DIR__.'/src/acf/andyp_plugin_register.php';
 // │                                Run Menus                                │
 // └─────────────────────────────────────────────────────────────────────────┘
 require __DIR__.'/src/filter/menus.php';
+new code_inject;

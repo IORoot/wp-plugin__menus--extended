@@ -1,129 +1,143 @@
 <?php
 
 
-class mc_menus
+class code_inject
 {
-    public $icon;
 
 
     public function __construct()
     {
-        $this->menu_filters();
-        return;
+        
+        add_filter('nav_menu_link_attributes', [$this, 'a_tag_class_inject'], 10, 4);
+
+        add_filter('walker_nav_menu_start_el', [$this, 'menu_item_open'], 10, 4);
+        add_filter('walker_nav_menu_close_el', [$this, 'menu_item_close'], 10, 4);
+
+        add_filter('nav_menu_submenu_open', [$this, 'submenu_open'], 10, 2);
+        add_filter('nav_menu_submenu_close', [$this, 'submenu_close'], 10, 2);
     }
 
 
-    public function menu_filters()
-    {
-        add_filter('wp_nav_menu_objects', array($this, 'nav_icons'), 10, 2);
-        add_filter('walker_nav_menu_start_el', array($this, 'nav_description'), 10, 4);
-        add_filter('walker_nav_menu_start_el', array($this, 'nav_image'), 10, 4);
-    }
+    /**
+     * 
+     * Usual Menu structure:
+     * 
+     * <ul>
+     *      <li>
+     *          <a> </a>
+     *          <ul class="sub-menu">
+     *              <li>
+     *                  <a> </a>
+     *              <li>
+     *          </ul>
+     *      </li>
+     * </ul>
+     * 
+     * These Filters contol the classes on the <a></a> tags
+     * and the <ul class="sub-menu"> tags.
+     * 
+     * It also injects code between the <a></a> tags. 
+     * 
+     */
 
 
     // ┌─────────────────────────────────────────────────────────────────────────┐
     // │                                                                         │
-    // │                                  ICON                                   │
+    // │                 Class Injection for <A> tags under <LI> tags            │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function nav_icons($items, $args)
-    {
-        // loop
-        foreach ($items as $item) {
-            $item->title = $this->icon($item);
-        }
-
-        // return
-        return $items;
-    }
-
-
-    public function icon($item)
-    {
-        // vars
-        $icon     = get_field('mc_icon', $item);
-        $colour   = get_field('mc_icon_colour', $item);
-        $position = get_field('mc_icon_position', $item);
-        $class    = get_field('mc_icon_class', $item);
-
-        // append icon
-        if ($icon) {
-            $this->icon = '<i class="mdi mdi-';
-            $this->icon .= $icon;
-            
-            if ($class) {
-                $this->icon .= ' '.$class. ' ';
-            }
-
-            $this->icon .= '"';  //close class
-
-            if ($colour) {
-                $this->icon .= ' style="color:'.$colour. '" ';
-            }
-
-            $this->icon .= '></i>';
-
-            if ($position == 'after') {
-                return  $item->title . $this->icon;
-            }
-
-            return $this->icon . $item->title;
-        }
-
-        return  $item->title;
-    }
-
-    
-
-
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                                                         │
-    // │                                 IMAGE                                   │
-    // │                                                                         │
-    // └─────────────────────────────────────────────────────────────────────────┘
-    public function nav_image($item_output, $item, $depth, $args)
+    public function a_tag_class_inject($atts, $item, $args, $depth )
     {
         
         // vars
-        $image    = get_field('mc_image', $item);
-        $position = get_field('mc_image_position', $item);
+        $a_classes = get_field('a_classes', $item);
 
-        if (!$image) {
-            return $item_output;
-        }
+        if (!$a_classes) { return $atts; }
 
-        $image_html = '<div class="menu-item-image lazyload" data-bg="'.$image['url'].'" alt="'.$image['alt'].'"></div>';
+        $atts['class'] = $a_classes;
 
-        if ($position == 'after') {
-            $item_output = preg_replace('/(<\/a.*?>)/', $image_html.'$1', $item_output);
-            return $item_output;
-        }
+        return $atts;
 
-        $item_output = preg_replace('/(<a.*?>)/', '$1'.$image_html, $item_output);
-        return $item_output;
     }
 
 
     // ┌─────────────────────────────────────────────────────────────────────────┐
     // │                                                                         │
-    // │                              DESCRIPTION                                │
+    // │                              Code Injection                             │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function nav_description($item_output, $item, $depth, $args)
+    public function menu_item_open($item_output, $item, $depth, $args)
     {
         
         // vars
-        $switch = get_field('mc_description', $item);
+        $code = get_field('menu_item_open', $item);
 
-        if (!$switch) {
+        if (!$code) {
             return $item_output;
         }
+        
+        return $code;
 
-        $item_output = str_replace($args->link_after . '</a>', '<p class="menu-item-description">' . $item->description . '</p>' . $args->link_after . '</a>', $item_output);
+    }
 
-        // return
-        return $item_output;
+    // ┌─────────────────────────────────────────────────────────────────────────┐
+    // │                                                                         │
+    // │                              Code Injection                             │
+    // │                                                                         │
+    // └─────────────────────────────────────────────────────────────────────────┘
+    public function menu_item_close($item_output, $item, $depth, $args)
+    {
+        
+        // vars
+        $code = get_field('menu_item_close', $item);
+
+        if (!$code) {
+            return $item_output;
+        }
+        
+        return $code;
+
+    }
+
+
+
+
+    // ┌─────────────────────────────────────────────────────────────────────────┐
+    // │                                                                         │
+    // │              Replace the opening sub-menu tags tith filter              │
+    // │                                                                         │
+    // └─────────────────────────────────────────────────────────────────────────┘
+    public function submenu_open($start_lvl, $item )
+    {
+
+        $code = get_field('submenu_open', $item);
+
+        if (!$code) {
+            return $start_lvl;
+        }
+        
+        return $code;
+
+    }
+
+
+
+    // ┌─────────────────────────────────────────────────────────────────────────┐
+    // │                                                                         │
+    // │              Replace the closing sub-menu tags tith filter              │
+    // │                                                                         │
+    // └─────────────────────────────────────────────────────────────────────────┘
+    public function submenu_close($close_lvl, $item )
+    {
+
+        $code = get_field('submenu_close', $item);
+
+        if (!$code) {
+            return $close_lvl;
+        }
+        
+        return $code;
+
     }
 }
 
-new mc_menus;
