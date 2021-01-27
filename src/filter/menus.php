@@ -71,7 +71,8 @@ class code_inject
         
         $code = get_field('menu_item_open', $item);
 
-        // look for {{image}} or {{image_div}}
+        // look for {{moustaches}}
+        $code = $this->check_for_search_form_moustaches($code, $item);
         $code = $this->check_for_image_moustaches($code, $item);
         $code = $this->check_for_image_div_moustaches($code, $item);
 
@@ -143,6 +144,23 @@ class code_inject
 
     }
 
+
+    // ┌─────────────────────────────────────────────────────────────────────────┐
+    // │                                                                         │
+    // │          check for {{search_form}} and replace with item image          │
+    // │                                                                         │
+    // └─────────────────────────────────────────────────────────────────────────┘ 
+    public function check_for_search_form_moustaches($code, $item)
+    {
+
+        if (empty($code) || empty($item)){ return $code; }
+
+        if (strpos($code, '{{search_form}}') !== false) {
+            return str_replace('{{search_form}}', get_search_form(['echo' => false]), $code);
+        }
+        
+        return $code;
+    }
 
     // ┌─────────────────────────────────────────────────────────────────────────┐
     // │                                                                         │
