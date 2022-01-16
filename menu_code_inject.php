@@ -24,5 +24,6 @@ require __DIR__.'/src/acf/acf_panel.php';
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                Run Menus                                │
 // └─────────────────────────────────────────────────────────────────────────┘
+require __DIR__.'/src/filter/menu_item_width.php';
 require __DIR__.'/src/filter/menus.php';
 new code_inject;
