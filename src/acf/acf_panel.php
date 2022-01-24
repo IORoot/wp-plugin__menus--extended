@@ -105,7 +105,7 @@ if( function_exists('acf_add_local_field_group') ):
                     'id' => '',
                 ),
                 'default_value' => '<ul class="hidden top-24 left-0 absolute w-full mb-16 sm:mb-0 shadow-xl bg-black text-white">
-        <div class="container mx-auto w-full flex-col md:flex-row flex flex-wrap justify-between mx-2 p-6">',
+        <div class="container w-full flex-col md:flex-row flex flex-wrap justify-between mx-2 p-6">',
                 'placeholder' => '',
                 'maxlength' => '',
                 'rows' => 4,
