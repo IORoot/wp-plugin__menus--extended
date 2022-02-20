@@ -1,4 +1,3 @@
-
 <?php
 
 class check_images {
