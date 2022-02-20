@@ -376,7 +376,7 @@ if( function_exists('acf_add_local_field_group') ):
     
     
     <h4>Theme CSS</h4>
-    Make suree your theme contains the following CSS so that thee hovering works for submenu items.
+    Make sure your theme contains the following CSS so that the hovering works for submenu items.
     
     <pre>
             <textarea rows="1">
@@ -395,7 +395,11 @@ if( function_exists('acf_add_local_field_group') ):
     
             }
             </textarea>
-    </pre>',
+    </pre>
+    
+    
+    <h4>Shortcodes</h4>
+    All [shortcodes] will be run within the menus.',
                 'new_lines' => '',
                 'esc_html' => 0,
             ),

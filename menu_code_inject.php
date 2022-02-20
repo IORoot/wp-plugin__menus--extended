@@ -22,6 +22,14 @@ require __DIR__.'/src/acf/andyp_plugin_register.php';
 require __DIR__.'/src/acf/acf_panel.php';
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
+// │                         Setup Moustache checks                          │
+// └─────────────────────────────────────────────────────────────────────────┘
+require __DIR__.'/src/moustaches/image_div.php';
+require __DIR__.'/src/moustaches/images.php';
+require __DIR__.'/src/moustaches/search_form.php';
+require __DIR__.'/src/moustaches/shortcodes.php';
+
+// ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                Run Menus                                │
 // └─────────────────────────────────────────────────────────────────────────┘
 require __DIR__.'/src/filter/menu_item_width.php';
