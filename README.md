@@ -131,47 +131,48 @@ header nav div #main-menu {
 Top of the menu edit page (this page), click on 'Screen Options' and enable: -> Link Target -> Title Attribute -> CSS Classes
 Layout
 All menu items are list items in an unordered list.
-    
+```php
     <ul>
             <li><a href="/">Link Title</a></li>
             <li><a href="/">Link Title 2</a></li>
     </ul>
     
+```
 
 ### CSS Classes
 By adding class names into the CSS Classes (optional) form field, you will inject it into the list item.
-            
+```php        
     <ul>
             <li class="added_class"><a href="/">Link Title</a></li>
             <li><a href="/">Link Title 2</a></li>
     </ul>
-    
+```
 
     
 ### Link Classes
 If you simply want to add classes into the link, you can use this textbox.
-    
+```php
     <ul>
             <li ><a class="link_class" href="/">Link Title</a></li>
             <li><a href="/">Link Title 2</a></li>
     </ul>
-    
+```
 
 
 ### Menu Item
 The “Menu Item” section allows you to completely replace that list-item for custom code.
-    
+```php
     <ul>
             [OPEN CODE][CLOSE CODE]
             <li><a href="/">Link Title 2</a></li>
     </ul>
-    
+```
 
 
 The reason we have both open and close code is if we have submenu items. Then this code will wrap that item.
 Menu with sub items
 If a menu item has a sub item, then a nested unordered list will be injected into the main list.
-
+```php
     <ul>
             <li>
                     <a href="/">Title</a>
@@ -181,10 +182,10 @@ If a menu item has a sub item, then a nested unordered list will be injected int
             </li>
             <li><a href="/">Link Title 2</a></li>
     </ul>
-
+```
 
 The 'Menu with sub items' opening and closing textareas allow you to change the unordered list to anything else.
-    
+```php
     <ul>
             <li>
                     <a href="/">Title</a>
@@ -194,7 +195,7 @@ The 'Menu with sub items' opening and closing textareas allow you to change the 
             </li>
             <li><a href="/">Link Title 2</a></li>
     </ul>
-    
+```
 
     
 It replaces the unordered list tag with a class of “sub-menu”.
@@ -204,21 +205,21 @@ Use the media picker to choose an image you wish to inject into the code. Once t
 
 ### `{{image}}`
 This injects the image as an image tag.
-    
+```php
     <img class="IMG_CLASSES" data-bg="IMG_URL" alt="IMG_ALT" src="IMG_URL" ></img>;
-    
+```
 
 
 ### `{{image_div}}`
 This injects the image as a background image to a div.
-    
+```php
     <div class="IMG_CLASSES" data-bg="IMG_URL" alt="IMG_ALT" style="background-image: url(IMG_URL);" ></div>;
-    
+```
 
     
 ### Theme CSS
 Make sure your theme contains the following CSS so that the hovering works for submenu items.
-    
+```php
     header nav div #main-menu {
 
             /* For hovering */
@@ -233,7 +234,7 @@ Make sure your theme contains the following CSS so that the hovering works for s
             } 
 
     }
-
+```
 
 ### Shortcodes
 All `[shortcodes]` will be run within the menus.
