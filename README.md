@@ -62,7 +62,7 @@ These are the steps to get up and running with this plugin.
     ```
 1. Composer.
     ```sh
-    cd ./wp-content/plugins/thumbnail-folders
+    cd ./wp-content/plugins/menus-extended
     composer install
     ```
 
@@ -108,7 +108,7 @@ for the sub-menu:
 See the `examples` folder.
 
 ###  3.3. <a name='CSS'></a>CSS
-For the show/hide functionality of the sub-menus you need to include the following CSS. (PostCSS / SASS)
+For the show/hide functionality of the sub-menus you need to include the following CSS on your webpage. (PostCSS / SASS)
 
 ```css
 /* SASS */
@@ -128,7 +128,7 @@ header nav div #main-menu {
 
 
 ### Setup
-Top of the menu edit page (this page), click on 'Screen Options' and enable: -> Link Target -> Title Attribute -> CSS Classes
+Top of the menu edit page, click on 'Screen Options' and enable: -> Link Target -> Title Attribute -> CSS Classes
 Layout
 All menu items are list items in an unordered list.
 ```php
@@ -148,7 +148,6 @@ By adding class names into the CSS Classes (optional) form field, you will injec
     </ul>
 ```
 
-    
 ### Link Classes
 If you simply want to add classes into the link, you can use this textbox.
 ```php
@@ -157,7 +156,7 @@ If you simply want to add classes into the link, you can use this textbox.
             <li><a href="/">Link Title 2</a></li>
     </ul>
 ```
-
+![https://github.com/IORoot/wp-plugin__menus--extended/blob/master/files/docs/link-classes.png?raw=true](https://github.com/IORoot/wp-plugin__menus--extended/blob/master/files/docs/link-classes.png?raw=true)
 
 ### Menu Item
 The “Menu Item” section allows you to completely replace that list-item for custom code.
@@ -168,9 +167,14 @@ The “Menu Item” section allows you to completely replace that list-item for 
     </ul>
 ```
 
+![https://github.com/IORoot/wp-plugin__menus--extended/blob/master/files/docs/menu-item.png?raw=true](https://github.com/IORoot/wp-plugin__menus--extended/blob/master/files/docs/menu-item.png?raw=true)
+
 
 The reason we have both open and close code is if we have submenu items. Then this code will wrap that item.
 Menu with sub items
+
+### Menu with Sub-items
+
 If a menu item has a sub item, then a nested unordered list will be injected into the main list.
 ```php
     <ul>
@@ -197,26 +201,29 @@ The 'Menu with sub items' opening and closing textareas allow you to change the 
     </ul>
 ```
 
-    
+![https://github.com/IORoot/wp-plugin__menus--extended/blob/master/files/docs/sub-items.png?raw=true](https://github.com/IORoot/wp-plugin__menus--extended/blob/master/files/docs/sub-items.png?raw=true)
+
+
 It replaces the unordered list tag with a class of “sub-menu”.
 
 ### Images
 Use the media picker to choose an image you wish to inject into the code. Once the image is selected you can embed it into any of the fields with one of the following moustache codes:
 
-### `{{image}}`
+#### `{{image}}`
 This injects the image as an image tag.
 ```php
-    <img class="IMG_CLASSES" data-bg="IMG_URL" alt="IMG_ALT" src="IMG_URL" ></img>;
+    <img class="IMG_CLASSES" data-bg="IMG_URL" alt="IMG_ALT" src="IMG_URL" /></img>;
 ```
 
 
-### `{{image_div}}`
+#### `{{image_div}}`
 This injects the image as a background image to a div.
 ```php
     <div class="IMG_CLASSES" data-bg="IMG_URL" alt="IMG_ALT" style="background-image: url(IMG_URL);" ></div>;
 ```
 
-    
+![https://github.com/IORoot/wp-plugin__menus--extended/blob/master/files/docs/image.png?raw=true](https://github.com/IORoot/wp-plugin__menus--extended/blob/master/files/docs/image.png?raw=true)
+
 ### Theme CSS
 Make sure your theme contains the following CSS so that the hovering works for submenu items.
 ```php
